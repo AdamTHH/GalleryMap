@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:GalleryMap.Helpers"
+             x:Class="GalleryMap.MainPage">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <Label Text="Összes kép" 
+       FontSize="24" 
+       FontAttributes="Bold"
+       Margin="0,20,0,10"/>
+                <!--<Button
+        Style="{StaticResource IconButtonStyle}"
+        Text="{x:Static helpers:IconFont.Map}"
+        Command="{Binding GetLocation}"/>-->
+                <CollectionView ItemsSource="{Binding ImageLocations}"
+                               SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                        Span="3"
+                                        HorizontalItemSpacing="10"
+                                        VerticalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageSource}"
+                                    Aspect="AspectFill"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Még nincsenek képek. Nyomd meg a + gombot!"
+                       IsVisible="{Binding IsEmpty}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="0,50,0,0"
+                       TextColor="Gray"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Text="+"
+                Style="{StaticResource FabStyle}"
+                Command="{Binding UploadPicture}"/>
+        
+        
+    </Grid>
+
+</ContentPage>

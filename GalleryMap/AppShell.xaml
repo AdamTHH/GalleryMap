@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GalleryMap.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GalleryMap"
+    xmlns:views="clr-namespace:GalleryMap.Views"
+    Title="GalleryMap">
+
+    <TabBar>
+        <Tab Title="Gallery" Icon="gallery_icon">
+            <ShellContent
+            Title="Gallery"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+        </Tab>
+
+        <Tab Title="Maps" Icon="map_icon">
+            <ShellContent
+            Title="Maps"
+            ContentTemplate="{DataTemplate views:MapsPage}"
+            Route="MapsPage" />
+        </Tab>
+
+        <!--<Tab Title="Add Image" Icon="add_image">
+            <ShellContent
+            Title="Add Image"
+            ContentTemplate="{DataTemplate views:AddImagePage}"
+            Route="AddImagePage" />
+        </Tab>-->
+    </TabBar>
+
+</Shell>

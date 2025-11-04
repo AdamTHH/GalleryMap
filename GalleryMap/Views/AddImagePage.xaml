@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:GalleryMap.ViewModels"
+             xmlns:helpers="clr-namespace:GalleryMap.Helpers"
+             x:Class="GalleryMap.Views.AddImagePage"
+             x:DataType="viewmodels:AddImagePageViewModel"
+             Title="Add Image">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Feltöltendő kép" Style="{StaticResource SectionHeaderLabelStyle}"/>
+                    <Image Source="{Binding SelectedImageSource}"
+                       HeightRequest="350"
+                       Aspect="AspectFit"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Location" Style="{StaticResource SectionHeaderLabelStyle}"/>
+
+                        <Label
+                            Text="{Binding Location}"
+                            FontSize="14"
+                            TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"
+                            LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+
+                    <HorizontalStackLayout Grid.Column="2" Spacing="5">
+                        <Button 
+                                Style="{StaticResource IconButtonStyle}"
+                                Text="{x:Static helpers:IconFont.LocationPin}"
+                                Command="{Binding GetLocation}"/>
+
+                        <Button
+                                Style="{StaticResource IconButtonStyle}"
+                                Text="{x:Static helpers:IconFont.Map}"
+                                Command="{Binding GetLocation}"/>
+                    </HorizontalStackLayout>
+
+
+                </Grid>
+            </Border>
+
+            <Button Text="+ Add Image"
+                    Command="{Binding CreateImage}"
+        HorizontalOptions="Fill"
+        Style="{StaticResource ModernButtonStyle}"
+        AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+        AbsoluteLayout.LayoutFlags="All"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
