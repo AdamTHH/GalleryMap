@@ -23,8 +23,8 @@ namespace GalleryMap
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("Font Awesome 7 Free-Regular-400.otf", "FontAwesomeRegular");
                     fonts.AddFont("Font Awesome 7 Free-Solid-900.otf", "FontAwesomeSolid");
-                });
-                //.UseMauiMaps();
+                })
+                .UseMauiMaps();
 
 
 #if DEBUG
@@ -48,13 +48,6 @@ namespace GalleryMap
             builder.Services.AddSingleton<IImageService, ImageService>();
 
             var app = builder.Build();
-
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var dbPath = Path.Combine(FileSystem.AppDataDirectory, "maui.db");
-            //    builder.Services.AddDbContext<GalleryMapDbContext>(options =>
-            //        options.UseSqlite($"Data Source={dbPath}"));
-            //}
 
             return app;
         }

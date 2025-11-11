@@ -12,13 +12,14 @@ namespace GalleryMap.ViewModels
 
         public MapsPageViewModel()
         {
-            // Create the Map control and configure a sensible default region.
             Map = new Map(MapSpan.FromCenterAndRadius(new Location(0, 0), Distance.FromKilometers(1000)))
             {
-                MapType = MapType.Street,
+                MapType = MapType.Satellite,
                 IsShowingUser = true,
                 Margin = new Thickness(0)
             };
+
+
         }
 
         public void MoveTo(double latitude, double longitude, double radiusKm = 1)

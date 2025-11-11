@@ -87,4 +87,12 @@
 	  <Folder Include="Database\Services\" />
 	</ItemGroup>
 
+  <PropertyGroup>
+    <GoogleMapsApiKey>$(GOOGLE_MAPS_API_KEY)</GoogleMapsApiKey>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <MauiBuildProperties Include="GoogleMapsApiKey" Value="$(GoogleMapsApiKey)" />
+  </ItemGroup>
+
 </Project>

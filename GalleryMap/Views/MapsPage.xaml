@@ -4,5 +4,5 @@
              x:Class="GalleryMap.Views.MapsPage"
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
              Title="MapsPage">
-    <maps:Map x:Name="Map" />
+    <maps:Map x:Name="map" />
 </ContentPage>

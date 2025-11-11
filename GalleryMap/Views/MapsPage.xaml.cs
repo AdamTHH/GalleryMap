@@ -1,13 +1,13 @@
+using GalleryMap.ViewModels;
+
 namespace GalleryMap.Views;
 
 public partial class MapsPage : ContentPage
 {
-	public MapsPage()
+	public MapsPage(MapsPageViewModel mapsPageViewModel)
 	{
 		InitializeComponent();
 
-        //var mapControl = new Mapsui.UI.Maui.MapControl();
-        //mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        //Content = mapControl;
+        BindingContext = mapsPageViewModel;
     }
 }
