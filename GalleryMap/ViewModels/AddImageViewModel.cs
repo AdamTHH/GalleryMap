@@ -11,7 +11,6 @@ namespace GalleryMap.ViewModels
     public partial class AddImagePageViewModel : BaseViewModel
     {
         private readonly IImageService _imageService;
-        private readonly ILocationService _locationService;
         private readonly IImageLocationRepository _repository;
 
         private ImageSource selectedImageSource;
@@ -38,10 +37,9 @@ namespace GalleryMap.ViewModels
         public Command GetLocation { get; set; }
         public Command CreateImage { get; set; }
 
-        public AddImagePageViewModel(IImageService imageService, ILocationService locationService, IImageLocationRepository repository)
+        public AddImagePageViewModel(IImageService imageService, IImageLocationRepository repository)
         {
             _imageService = imageService;
-            _locationService = locationService;
             _repository = repository;
 
             GetLocation = new Command(OnImageLocation);
@@ -50,12 +48,37 @@ namespace GalleryMap.ViewModels
 
         async void OnImageLocation()
         {
-            var location = _locationService.GetLocationAsync();
-
-            if (location != null)
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if (status != PermissionStatus.Granted)
             {
-                var loc = await location;
-                Location = loc;
+                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
+
+            if (status == PermissionStatus.Granted)
+            {
+                try
+                {
+                    var location = await Geolocation.Default.GetLocationAsync(new GeolocationRequest
+                    {
+                        DesiredAccuracy = GeolocationAccuracy.High,
+                        Timeout = TimeSpan.FromSeconds(10)
+                    });
+                    Location = location;
+                }
+                catch (FeatureNotEnabledException)
+                {
+                    var result = await Shell.Current.DisplayAlert(
+                        "Location Services Disabled",
+                        "Please enable location services in your device settings.",
+                        "Open Settings",
+                        "Cancel");
+
+                    if (result)
+                    {
+                        AppInfo.ShowSettingsUI();
+                    }
+                    Location = new Location { Latitude = 0, Longitude = 0 };
+                }
             }
             else
             {
@@ -66,13 +89,11 @@ namespace GalleryMap.ViewModels
 
         async void OnCreateImage()
         {
-            var location = await _locationService.GetLocationAsync();
-
             ImageLocation imageLocation = new ImageLocation
             {
                 ImageUrl = Convert.ToBase64String(_imageService.CurrentImage),
-                Latitude = location.Latitude,
-                Longitude = location.Longitude
+                Latitude = Location.Latitude,
+                Longitude = Location.Longitude
             };
 
             await _repository.CreateAsync(imageLocation);

@@ -22,7 +22,8 @@ namespace GalleryMap.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite("Data Source=maui.db");
+                var dbPath = Path.Combine(FileSystem.AppDataDirectory, "maui.db");
+                optionsBuilder.UseSqlite($"Data Source={dbPath}");
             }
         }
 

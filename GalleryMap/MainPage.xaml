@@ -20,14 +20,18 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                         Span="3"
-                                        HorizontalItemSpacing="10"
-                                        VerticalItemSpacing="10"/>
+                                        HorizontalItemSpacing="5"
+                                        VerticalItemSpacing="5"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ImageSource}"
-                                    Aspect="AspectFill"/>
+                            <Border StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="0"/>
+                                </Border.StrokeShape>
+                                <Image Source="{Binding ImageSource}" Aspect="AspectFill"/>
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

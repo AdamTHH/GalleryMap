@@ -6,7 +6,6 @@ using GalleryMap.ViewModels;
 using GalleryMap.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace GalleryMap
 {
@@ -17,7 +16,6 @@ namespace GalleryMap
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
@@ -26,13 +24,14 @@ namespace GalleryMap
                     fonts.AddFont("Font Awesome 7 Free-Regular-400.otf", "FontAwesomeRegular");
                     fonts.AddFont("Font Awesome 7 Free-Solid-900.otf", "FontAwesomeSolid");
                 });
-                
+                //.UseMauiMaps();
+
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddDbContext<GalleryMapDbContext>(options => options.UseSqlite("Data Source=maui.db"));
+            builder.Services.AddDbContext<GalleryMapDbContext>();
 
 
             builder.Services.AddScoped<MainPageViewModel>();
@@ -47,15 +46,15 @@ namespace GalleryMap
             builder.Services.AddScoped<IImageLocationRepository, ImageLocationRepository>();
 
             builder.Services.AddSingleton<IImageService, ImageService>();
-            builder.Services.AddSingleton<ILocationService, LocationService>();
 
             var app = builder.Build();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var dbContext = scope.ServiceProvider.GetRequiredService<GalleryMapDbContext>();
-                dbContext.Database.Migrate();
-            }
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var dbPath = Path.Combine(FileSystem.AppDataDirectory, "maui.db");
+            //    builder.Services.AddDbContext<GalleryMapDbContext>(options =>
+            //        options.UseSqlite($"Data Source={dbPath}"));
+            //}
 
             return app;
         }
