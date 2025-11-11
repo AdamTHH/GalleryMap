@@ -61,6 +61,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="12.3.0" />
+		<PackageReference Include="dotenv.net" Version="4.0.0" />
 		<PackageReference Include="FontAwesome" Version="4.7.0" />
 		<PackageReference Include="MetadataExtractor" Version="2.9.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />

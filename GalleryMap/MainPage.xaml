@@ -11,10 +11,6 @@
        FontSize="24" 
        FontAttributes="Bold"
        Margin="0,20,0,10"/>
-                <!--<Button
-        Style="{StaticResource IconButtonStyle}"
-        Text="{x:Static helpers:IconFont.Map}"
-        Command="{Binding GetLocation}"/>-->
                 <CollectionView ItemsSource="{Binding ImageLocations}"
                                SelectionMode="Single">
                     <CollectionView.ItemsLayout>
@@ -26,11 +22,11 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Border StrokeThickness="0">
+                            <Border StrokeThickness="0" HeightRequest="100">
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="0"/>
                                 </Border.StrokeShape>
-                                <Image Source="{Binding ImageSource}" Aspect="AspectFill"/>
+                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

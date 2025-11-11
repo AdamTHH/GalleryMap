@@ -2,47 +2,74 @@ using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using System.Threading.Tasks;
+using GalleryMap.Database.Repositories;
+using GalleryMap.Models;
+using System.Linq;
 using Map = Microsoft.Maui.Controls.Maps.Map;
 
 namespace GalleryMap.ViewModels
 {
     public class MapsPageViewModel : BaseViewModel
     {
-        public Map Map { get; }
+        private readonly IImageLocationRepository _imageLocationRepository;
+        private Map map;
 
-        public MapsPageViewModel()
+        public Map Map
         {
-            Map = new Map(MapSpan.FromCenterAndRadius(new Location(0, 0), Distance.FromKilometers(1000)))
+            get { return map; }
+            set
             {
-                MapType = MapType.Satellite,
-                IsShowingUser = true,
-                Margin = new Thickness(0)
-            };
-
-
+                map = value;
+                OnPropertyChanged("map");
+            }
         }
 
-        public void MoveTo(double latitude, double longitude, double radiusKm = 1)
+
+        public MapsPageViewModel(IImageLocationRepository imageLocationRepository)
         {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(latitude, longitude), Distance.FromKilometers(radiusKm)));
-            });
+            _imageLocationRepository = imageLocationRepository;
         }
 
-        public void AddPin(double latitude, double longitude, string label = null, string address = null)
+        private async void LoadAllImageLocationsAsync()
         {
-            MainThread.BeginInvokeOnMainThread(() =>
+            try
             {
-                var pin = new Pin
+                var imageLocations = await _imageLocationRepository.GetAllAsync();
+
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Label = label,
-                    Address = address,
-                    Location = new Location(latitude, longitude),
-                    Type = PinType.Place
-                };
-                Map.Pins.Add(pin);
-            });
+                    Map.Pins.Clear();
+
+                    foreach (var imageLocation in imageLocations)
+                    {
+                        var pin = new Pin
+                        {
+                            Label = $"Image {imageLocation.Id}",
+                            Address = $"Created: {imageLocation.CreatedAt:MMM dd, yyyy}",
+                            Location = new Location(imageLocation.Latitude, imageLocation.Longitude),
+                            Type = PinType.Place
+                        };
+                        Map.Pins.Add(pin);
+                    }
+
+                    if (imageLocations.Any())
+                    {
+                        var firstLocation = imageLocations.First();
+                        Map.MoveToRegion(MapSpan.FromCenterAndRadius(
+                            new Location(firstLocation.Latitude, firstLocation.Longitude),
+                            Distance.FromKilometers(10)));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error loading image locations: {ex.Message}");
+            }
+        }
+
+        public async Task RefreshImageLocationsAsync()
+        {
+            await Task.Run(LoadAllImageLocationsAsync);
         }
     }
 }

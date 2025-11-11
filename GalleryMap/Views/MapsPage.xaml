@@ -1,8 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              x:Class="GalleryMap.Views.MapsPage"
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
              Title="MapsPage">
-    <maps:Map x:Name="map" />
+  
+    <Grid>
+        <Border StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+            <maps:Map x:Name="mainMap">
+                <maps:Map.ItemsSource
+                    >
+                    <Binding Path="Map.Pins" />
+                </maps:Map.ItemsSource>
+            </maps:Map>
+        </Border>
+        
+        <!-- Image Overlay -->
+        <Grid x:Name="imageOverlay" IsVisible="False" BackgroundColor="#80000000">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped"/>
+            </Grid.GestureRecognizers>
+            
+            <Frame BackgroundColor="White" 
+                   CornerRadius="10" 
+                   Margin="20" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   MaximumWidthRequest="350"
+                   MaximumHeightRequest="500">
+                
+                <StackLayout Spacing="10">
+                    <!-- Close button -->
+                    <Button x:Name="closeButton"
+                            Text="✕"
+                            BackgroundColor="Transparent"
+                            TextColor="Black"
+                            FontSize="18"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            Clicked="OnCloseButtonClicked"/>
+                    
+                    <!-- Image -->
+                    <Image x:Name="overlayImage" 
+                           Aspect="AspectFit"
+                           MaximumWidthRequest="300"
+                           MaximumHeightRequest="400"/>
+                    
+                    <!-- Image info -->
+                    <Label x:Name="imageInfoLabel" 
+                           TextColor="Black"
+                           FontSize="14"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </Grid>
+    
 </ContentPage>
