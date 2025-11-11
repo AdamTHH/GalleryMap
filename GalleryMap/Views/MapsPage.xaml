@@ -18,48 +18,6 @@
                 </maps:Map.ItemsSource>
             </maps:Map>
         </Border>
-        
-        <!-- Image Overlay -->
-        <Grid x:Name="imageOverlay" IsVisible="False" BackgroundColor="#80000000">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnOverlayTapped"/>
-            </Grid.GestureRecognizers>
-            
-            <Frame BackgroundColor="White" 
-                   CornerRadius="10" 
-                   Margin="20" 
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center"
-                   MaximumWidthRequest="350"
-                   MaximumHeightRequest="500">
-                
-                <StackLayout Spacing="10">
-                    <!-- Close button -->
-                    <Button x:Name="closeButton"
-                            Text="✕"
-                            BackgroundColor="Transparent"
-                            TextColor="Black"
-                            FontSize="18"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start"
-                            WidthRequest="30"
-                            HeightRequest="30"
-                            Clicked="OnCloseButtonClicked"/>
-                    
-                    <!-- Image -->
-                    <Image x:Name="overlayImage" 
-                           Aspect="AspectFit"
-                           MaximumWidthRequest="300"
-                           MaximumHeightRequest="400"/>
-                    
-                    <!-- Image info -->
-                    <Label x:Name="imageInfoLabel" 
-                           TextColor="Black"
-                           FontSize="14"
-                           HorizontalOptions="Center"/>
-                </StackLayout>
-            </Frame>
-        </Grid>
     </Grid>
     
 </ContentPage>

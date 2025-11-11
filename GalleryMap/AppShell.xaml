@@ -5,29 +5,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GalleryMap"
     xmlns:views="clr-namespace:GalleryMap.Views"
-    Title="GalleryMap">
+    Title="GalleryMap"
+    xmlns:helpers="clr-namespace:GalleryMap.Helpers">
 
     <TabBar>
-        <Tab Title="Gallery" Icon="gallery_icon">
+        <Tab Title="Gallery">
+            <Tab.Icon>
+                <FontImageSource 
+        Glyph="{x:Static helpers:IconFont.Image}"
+        FontFamily="FontAwesomeSolid"
+        />
+            </Tab.Icon>
             <ShellContent
             Title="Gallery"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />
         </Tab>
 
-        <Tab Title="Maps" Icon="map_icon">
+        <Tab Title="Maps">
+            <Tab.Icon>
+                <FontImageSource 
+                    Glyph="{x:Static helpers:IconFont.Map}"
+                    FontFamily="FontAwesomeSolid"
+                    />
+            </Tab.Icon>
             <ShellContent
             Title="Maps"
             ContentTemplate="{DataTemplate views:MapsPage}"
             Route="MapsPage" />
         </Tab>
-
-        <!--<Tab Title="Add Image" Icon="add_image">
-            <ShellContent
-            Title="Add Image"
-            ContentTemplate="{DataTemplate views:AddImagePage}"
-            Route="AddImagePage" />
-        </Tab>-->
     </TabBar>
 
 </Shell>

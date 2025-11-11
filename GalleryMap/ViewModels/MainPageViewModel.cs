@@ -38,6 +38,7 @@ namespace GalleryMap.ViewModels
         }
 
         public Command UploadPicture { get; set; }
+        public Command<ImageLocation> ImageTapped { get; set; }
         
         public MainPageViewModel(IImageService imageService, IImageLocationRepository imageLocationRepository)
         {
@@ -45,8 +46,18 @@ namespace GalleryMap.ViewModels
             _imageLocationRepository = imageLocationRepository;
 
             UploadPicture = new Command(OnUploadPicture);
+            ImageTapped = new Command<ImageLocation>(OnImageTapped);
 
             LoadImagesAsync();
+        }
+
+        async void OnImageTapped(ImageLocation imageLocation)
+        {
+            _imageService.SelectedImageLocation = imageLocation;
+            
+            var popup = new ImagePopup();
+            popup.BindingContext = _imageService;
+            await Shell.Current.CurrentPage.ShowPopupAsync(popup);
         }
 
         async void OnUploadPicture()
@@ -55,7 +66,7 @@ namespace GalleryMap.ViewModels
 
             if (imageData != null)
             {
-                _imageService.CurrentImage = imageData;
+                _imageService.AddedImage = imageData;
                 await Shell.Current.GoToAsync(nameof(AddImagePage));
             }
         }

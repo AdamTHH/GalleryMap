@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GalleryMap.Views.ImagePopup"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               CanBeDismissedByTappingOutsideOfPopup="True">
+    <ScrollView WidthRequest="280" HorizontalOptions="Center">
+        <VerticalStackLayout Spacing="10">
+            <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+            <Border HeightRequest="300" HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+
+                <ScrollView Orientation="Both" 
+                       HorizontalScrollBarVisibility="Never"
+                       VerticalScrollBarVisibility="Never">
+                    <Image Source="{Binding SelectedImageLocation.ImageSource}" 
+                       Aspect="Center"
+                       MaximumHeightRequest="600">
+                        <Image.GestureRecognizers>
+                            <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </ScrollView>
+            </Border>
+
+            <Button BackgroundColor="DarkRed" 
+                Style="{StaticResource ModernButtonStyle}" 
+                Text="Delete"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</toolkit:Popup>

@@ -26,7 +26,13 @@
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="0"/>
                                 </Border.StrokeShape>
-                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+
+                                <Image Source="{Binding ImageSource}" Aspect="AspectFill">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ImageTapped}" 
+            CommandParameter="{Binding .}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -44,8 +50,5 @@
         <Button Text="+"
                 Style="{StaticResource FabStyle}"
                 Command="{Binding UploadPicture}"/>
-        
-        
     </Grid>
-
 </ContentPage>

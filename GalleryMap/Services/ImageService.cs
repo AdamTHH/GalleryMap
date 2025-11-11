@@ -1,18 +1,26 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GalleryMap.Models;
 
 namespace GalleryMap.Services
 {
     public class ImageService : IImageService
     {
-        byte[]? _currentImage;
-        public byte[]? CurrentImage
+        byte[]? addedImage;
+        public byte[]? AddedImage
         {
-            get => _currentImage;
-            set => _currentImage = value;
+            get => addedImage;
+            set => addedImage = value;
+        }
+
+        private ImageLocation? selectedImageLocation;
+        public ImageLocation? SelectedImageLocation
+        {
+            get { return selectedImageLocation; }
+            set { selectedImageLocation = value; }
         }
 
     }
