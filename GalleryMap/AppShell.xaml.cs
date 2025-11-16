@@ -9,7 +9,7 @@ namespace GalleryMap
             InitializeComponent();
             Routing.RegisterRoute(nameof(AddImagePage), typeof(AddImagePage));
             Routing.RegisterRoute(nameof(MapsPage), typeof(MapsPage));
-            Routing.RegisterRoute(nameof(ImagePopup), typeof(ImagePopup));
+            Routing.RegisterRoute(nameof(ViewImagePage), typeof(ViewImagePage));
         }
     }
 }

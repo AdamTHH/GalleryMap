@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GalleryMap.Views.ViewImagePage"
+             Title="ViewImagePage"
+             xmlns:helpers="clr-namespace:GalleryMap.Helpers"
+             BackgroundColor="Black">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToImageLocation}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                            Glyph="{x:Static helpers:IconFont.MapLocationDot}"
+                         FontFamily="FontAwesomeSolid"
+                         Size="20"
+                         Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Command="{Binding DeleteImage}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static helpers:IconFont.TrashCan}"
+                         FontFamily="FontAwesomeSolid"
+                         Size="20"
+                         Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Image Source="{Binding SelectedImage.ImageSource}" 
+       Aspect="AspectFit" HeightRequest="600">
+        <Image.GestureRecognizers>
+            <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+        </Image.GestureRecognizers>
+    </Image>
+</ContentPage>

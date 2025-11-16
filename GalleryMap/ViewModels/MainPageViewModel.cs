@@ -16,48 +16,49 @@ namespace GalleryMap.ViewModels
     public partial class MainPageViewModel : BaseViewModel
     {
         private readonly IImageService _imageService;
-        private readonly IImageLocationRepository _imageLocationRepository;
-
-        private ObservableCollection<ImageLocation> imageLocations = new();
-        public ObservableCollection<ImageLocation> ImageLocations
+        private ObservableCollection<ImageLocation> images;
+        public ObservableCollection<ImageLocation> Images
         {
-            get { return imageLocations; }
+            get { return images; }
             set
             {
-                imageLocations = value;
-                OnPropertyChanged(nameof(ImageLocations));
+                images = value;
+                OnPropertyChanged(nameof(Images));
                 OnPropertyChanged(nameof(IsEmpty));
             }
         }
-        public bool IsEmpty => ImageLocations == null || ImageLocations.Count == 0;
-
-        public async void LoadImagesAsync()
-        {
-            var images = await _imageLocationRepository.GetAllAsync();
-            ImageLocations = new ObservableCollection<ImageLocation>(images);
-        }
-
+        public bool IsEmpty => Images == null || Images.Count == 0;
         public Command UploadPicture { get; set; }
         public Command<ImageLocation> ImageTapped { get; set; }
-        
-        public MainPageViewModel(IImageService imageService, IImageLocationRepository imageLocationRepository)
+        public MainPageViewModel(IImageService imageService)
         {
             _imageService = imageService;
-            _imageLocationRepository = imageLocationRepository;
+            Images = new ObservableCollection<ImageLocation>();
 
             UploadPicture = new Command(OnUploadPicture);
             ImageTapped = new Command<ImageLocation>(OnImageTapped);
 
-            LoadImagesAsync();
+            Shell.Current.Navigated += OnNavigated;
         }
 
+        private void OnNavigated(object? sender, ShellNavigatedEventArgs e)
+        {
+            if (e.Current.Location.OriginalString.Contains(nameof(MainPage)))
+            {
+                RefreshImages();
+            }
+        }
+
+        public async void RefreshImages()
+        {
+            var imageList = _imageService.Images;
+            Images = new ObservableCollection<ImageLocation>(imageList.OrderByDescending(i => i.CreatedAt));
+        }
         async void OnImageTapped(ImageLocation imageLocation)
         {
-            _imageService.SelectedImageLocation = imageLocation;
-            
-            var popup = new ImagePopup();
-            popup.BindingContext = _imageService;
-            await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+            _imageService.SelectedImage = imageLocation;
+
+            await Shell.Current.GoToAsync(nameof(ViewImagePage));
         }
 
         async void OnUploadPicture()

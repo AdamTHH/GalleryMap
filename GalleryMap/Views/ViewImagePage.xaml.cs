@@ -1,13 +1,15 @@
-using CommunityToolkit.Maui.Views;
+using GalleryMap.ViewModels;
 
 namespace GalleryMap.Views;
 
-public partial class ImagePopup : Popup
+public partial class ViewImagePage : ContentPage
 {
-	public ImagePopup()
+	public ViewImagePage(ViewImagePageViewModel viewImagePageViewModel)
 	{
 		InitializeComponent();
-	}
+
+        BindingContext = viewImagePageViewModel;
+    }
 
     private void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
     {

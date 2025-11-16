@@ -11,7 +11,6 @@ namespace GalleryMap.ViewModels
     public partial class AddImagePageViewModel : BaseViewModel
     {
         private readonly IImageService _imageService;
-        private readonly IImageLocationRepository _repository;
 
         private ImageSource selectedImageSource;
         public ImageSource SelectedImageSource
@@ -40,10 +39,9 @@ namespace GalleryMap.ViewModels
         public Command GetLocation { get; set; }
         public Command CreateImage { get; set; }
 
-        public AddImagePageViewModel(IImageService imageService, IImageLocationRepository repository)
+        public AddImagePageViewModel(IImageService imageService)
         {
             _imageService = imageService;
-            _repository = repository;
 
             GetLocation = new Command(OnImageLocation);
             CreateImage = new Command(OnCreateImage);
@@ -99,8 +97,8 @@ namespace GalleryMap.ViewModels
                 Longitude = Location.Longitude
             };
 
-            await _repository.CreateAsync(imageLocation);
-            await Shell.Current.GoToAsync("..");
+            await _imageService.CreateImageAsync(imageLocation);
+            await Shell.Current.Navigation.PopAsync(animated:true);
         }
     }
 }

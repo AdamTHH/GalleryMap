@@ -10,6 +10,10 @@ namespace GalleryMap.Services
     public interface IImageService
     {
         byte[]? AddedImage { get; set; }
-        ImageLocation? SelectedImageLocation { get; set; }
+        ImageLocation? SelectedImage { get; set; }
+        List<ImageLocation> Images { get; set; }
+        Task<List<ImageLocation>> LoadImagesAsync();
+        Task<bool> DeleteImageAsync(int id);
+        Task<ImageLocation> CreateImageAsync(ImageLocation image);
     }
 }

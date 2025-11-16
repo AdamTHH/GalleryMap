@@ -36,16 +36,21 @@ namespace GalleryMap
 
             builder.Services.AddScoped<MainPageViewModel>();
 
-            builder.Services.AddTransient<AddImagePageViewModel>();
             builder.Services.AddTransient<AddImagePage>();
+            builder.Services.AddTransient<AddImagePageViewModel>();
 
             builder.Services.AddTransient<MapsPage>();
             builder.Services.AddTransient<MapsPageViewModel>();
 
+            builder.Services.AddTransient<ViewImagePage>();
+            builder.Services.AddTransient<ViewImagePageViewModel>();
+
 
             builder.Services.AddScoped<IImageLocationRepository, ImageLocationRepository>();
 
+            builder.Services.AddSingleton<IEventService, EventService>();
             builder.Services.AddSingleton<IImageService, ImageService>();
+
 
             var app = builder.Build();
 

@@ -79,10 +79,10 @@
 	  <MauiXaml Update="Views\AddImagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ImagePopup.xaml">
+	  <MauiXaml Update="Views\MapsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\MapsPage.xaml">
+	  <MauiXaml Update="Views\ViewImagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
