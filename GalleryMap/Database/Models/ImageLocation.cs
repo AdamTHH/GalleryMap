@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 
 namespace GalleryMap.Models
 {
@@ -13,13 +14,26 @@ namespace GalleryMap.Models
     {
         [Key]
         public int Id { get; set; }
-        public string ImageUrl { get; set; }
+        public string Title { get; set; }
+        public byte[] ImageData { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        private ImageSource? _cachedImageSource;
+
         [NotMapped]
-        public ImageSource ImageSource => ImageSource.FromStream(() =>
-            new MemoryStream(Convert.FromBase64String(ImageUrl)));
+        public ImageSource ImageSource
+        {
+            get
+            {
+                if (_cachedImageSource == null)
+                {
+                    _cachedImageSource = ImageSource.FromStream(() =>
+                        new MemoryStream(ImageData));
+                }
+                return _cachedImageSource;
+            }
+        }
     }
 }

@@ -42,8 +42,11 @@ namespace GalleryMap
             builder.Services.AddTransient<MapsPage>();
             builder.Services.AddTransient<MapsPageViewModel>();
 
-            builder.Services.AddTransient<ViewImagePage>();
-            builder.Services.AddTransient<ViewImagePageViewModel>();
+            builder.Services.AddSingleton<ViewImagePage>();
+            builder.Services.AddSingleton<ViewImagePageViewModel>();
+
+            builder.Services.AddTransient<SmallImagePopup>();
+            builder.Services.AddTransient<SmallImagePopupViewModel>();
 
 
             builder.Services.AddScoped<IImageLocationRepository, ImageLocationRepository>();

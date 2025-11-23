@@ -55,9 +55,6 @@
                 <Setter Property="CornerRadius" Value="30"/>
                 <Setter Property="BackgroundColor" Value="#6200EE"/>
                 <Setter Property="TextColor" Value="White"/>
-                <Setter Property="HorizontalOptions" Value="End"/>
-                <Setter Property="VerticalOptions" Value="End"/>
-                <Setter Property="Margin" Value="20"/>
                 <Setter Property="Shadow">
                     <Shadow Brush="Black" Opacity="0.3" Radius="10" Offset="0,4"/>
                 </Setter>

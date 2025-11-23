@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GalleryMap.Views.SmallImagePopup"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <toolkit:Popup.Content>
+        <Border
+            BackgroundColor="White"
+            Stroke="LightGray"
+            StrokeThickness="1"
+            Padding="5">
+            <Image
+                Source="{Binding Image}"
+                Aspect="AspectFit">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Tap}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Border>
+    </toolkit:Popup.Content>
+</toolkit:Popup>

@@ -3,6 +3,7 @@ using System;
 using GalleryMap.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GalleryMap.Database.Migrations
 {
     [DbContext(typeof(GalleryMapDbContext))]
-    partial class GalleryMapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251123161220_UpdatedModel")]
+    partial class UpdatedModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.10");
@@ -35,10 +38,6 @@ namespace GalleryMap.Database.Migrations
 
                     b.Property<double>("Longitude")
                         .HasColumnType("REAL");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

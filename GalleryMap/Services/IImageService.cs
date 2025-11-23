@@ -13,7 +13,9 @@ namespace GalleryMap.Services
         ImageLocation? SelectedImage { get; set; }
         List<ImageLocation> Images { get; set; }
         Task<List<ImageLocation>> LoadImagesAsync();
-        Task<bool> DeleteImageAsync(int id);
-        Task<ImageLocation> CreateImageAsync(ImageLocation image);
+        Task<bool> DeleteAsync(int id);
+        Task<ImageLocation> CreateAsync(ImageLocation image);
+        Task<ImageLocation> ReadAsync(int id);
+        Task<ImageLocation?> UpdateAsync(ImageLocation image);
     }
 }

@@ -3,16 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:helpers="clr-namespace:GalleryMap.Helpers"
              x:Class="GalleryMap.MainPage">
-
+    
     <Grid>
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="20">
                 <Label Text="Összes kép" 
-       FontSize="24" 
-       FontAttributes="Bold"
-       Margin="0,20,0,10"/>
-                <CollectionView ItemsSource="{Binding Images}"
-                               SelectionMode="Single">
+                       FontSize="24" 
+                       FontAttributes="Bold"
+                       Margin="0,20,0,10"/>
+
+                <CollectionView ItemsSource="{Binding GroupedImages}"
+                               IsGrouped="True"
+                               SelectionMode="None">
+
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding MonthYear}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   Margin="0,10,0,5"
+                                   TextColor="#333333"/>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                         Span="3"
@@ -26,11 +39,10 @@
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="0"/>
                                 </Border.StrokeShape>
-
                                 <Image Source="{Binding ImageSource}" Aspect="AspectFill">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ImageTapped}" 
-            CommandParameter="{Binding .}"/>
+                                                            CommandParameter="{Binding .}"/>
                                     </Image.GestureRecognizers>
                                 </Image>
                             </Border>
@@ -47,8 +59,23 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <Button Text="+"
-                Style="{StaticResource FabStyle}"
-                Command="{Binding UploadPicture}"/>
+        <VerticalStackLayout HorizontalOptions="End" 
+                     VerticalOptions="End" 
+                     Margin="20"
+                     Spacing="20">
+            
+            <Button Text="{x:Static helpers:IconFont.Camera}"
+                    FontFamily="FontAwesomeSolid"
+                    FontSize="20"
+                    Style="{StaticResource FabStyle}"
+                    Command="{Binding UploadPictureCamera}"/>
+            
+            <Button Text="{x:Static helpers:IconFont.FileImage}"
+                    FontFamily="FontAwesomeSolid"
+                    FontSize="20"
+                    Style="{StaticResource FabStyle}"
+                    Command="{Binding UploadPictureGallery}"/>
+            
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

@@ -2,33 +2,51 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GalleryMap.Views.ViewImagePage"
-             Title="ViewImagePage"
              xmlns:helpers="clr-namespace:GalleryMap.Helpers"
-             BackgroundColor="Black">
+             BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
     <ContentPage.ToolbarItems>
+        <ToolbarItem IsEnabled="{Binding WereThereChanges}" Command="{Binding SaveChanges}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    Glyph="{x:Static helpers:IconFont.FloppyDisk}"
+                    FontFamily="FontAwesomeSolid"
+                    Size="20"
+                    Color="{AppThemeBinding Light=Black, Dark=White}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
         <ToolbarItem Command="{Binding GoToImageLocation}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                            Glyph="{x:Static helpers:IconFont.MapLocationDot}"
-                         FontFamily="FontAwesomeSolid"
-                         Size="20"
-                         Color="White" />
+                    Glyph="{x:Static helpers:IconFont.MapLocationDot}"
+                    FontFamily="FontAwesomeSolid"
+                    Size="20"
+                    Color="{AppThemeBinding Light=Black, Dark=White}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem Command="{Binding DeleteImage}">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="{x:Static helpers:IconFont.TrashCan}"
-                         FontFamily="FontAwesomeSolid"
-                         Size="20"
-                         Color="White" />
+                <FontImageSource
+                    Glyph="{x:Static helpers:IconFont.TrashCan}"
+                    FontFamily="FontAwesomeSolid"
+                    Size="20"
+                    Color="{AppThemeBinding Light=Black, Dark=White}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
+    <VerticalStackLayout Padding="0,20,0,0"
+                     Spacing="20">
+        <Entry
+            Text="{Binding NewTitle}"
+            FontSize="30" 
+            HorizontalTextAlignment="Center"
+            TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
 
-    <Image Source="{Binding SelectedImage.ImageSource}" 
-       Aspect="AspectFit" HeightRequest="600">
-        <Image.GestureRecognizers>
-            <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
-        </Image.GestureRecognizers>
-    </Image>
+        <Image Source="{Binding SelectedImage.ImageSource}" 
+               Aspect="AspectFit" HeightRequest="525">
+            <Image.GestureRecognizers>
+                <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+            </Image.GestureRecognizers>
+        </Image>
+        
+    </VerticalStackLayout>
 </ContentPage>

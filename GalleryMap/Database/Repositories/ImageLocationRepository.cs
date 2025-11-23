@@ -25,7 +25,7 @@ namespace GalleryMap.Database.Repositories
             return image;
         }
 
-        public async Task<ImageLocation?> GetByIdAsync(int id)
+        public async Task<ImageLocation?> ReadAsync(int id)
         {
             return await _context.ImageLocations.FindAsync(id);
         }
@@ -42,7 +42,7 @@ namespace GalleryMap.Database.Repositories
             if (existing == null)
                 return null;
 
-            existing.ImageUrl = image.ImageUrl;
+            existing.ImageData = image.ImageData;
             existing.Latitude = image.Latitude;
             existing.Longitude = image.Longitude;
 

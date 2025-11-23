@@ -34,7 +34,21 @@ namespace GalleryMap.ViewModels
             }
         }
 
-        public bool AddImageEnabled => _imageService.AddedImage != null && Location != null;
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+                OnPropertyChanged(nameof(AddImageEnabled));
+            }
+        }
+
+
+        public bool AddImageEnabled => _imageService.AddedImage != null && Location != null && Title != null;
 
         public Command GetLocation { get; set; }
         public Command CreateImage { get; set; }
@@ -92,12 +106,13 @@ namespace GalleryMap.ViewModels
         {
             ImageLocation imageLocation = new ImageLocation
             {
-                ImageUrl = Convert.ToBase64String(_imageService.AddedImage),
+                ImageData = _imageService.AddedImage,
                 Latitude = Location.Latitude,
-                Longitude = Location.Longitude
+                Longitude = Location.Longitude,
+                Title = Title
             };
 
-            await _imageService.CreateImageAsync(imageLocation);
+            await _imageService.CreateAsync(imageLocation);
             await Shell.Current.Navigation.PopAsync(animated:true);
         }
     }

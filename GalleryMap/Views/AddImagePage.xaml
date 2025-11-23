@@ -12,6 +12,13 @@
 
             <Border Style="{StaticResource CardBorderStyle}">
                 <VerticalStackLayout Spacing="5">
+                    <Label Text="Szöveg" Style="{StaticResource SectionHeaderLabelStyle}"/>
+                    <Entry Text="{Binding Title}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="5">
                     <Label Text="Feltöltendő kép" Style="{StaticResource SectionHeaderLabelStyle}"/>
                     <Image Source="{Binding SelectedImageSource}"
                        HeightRequest="350"

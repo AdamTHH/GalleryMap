@@ -43,17 +43,27 @@ namespace GalleryMap.Services
             return images;
         }
 
-        public async Task<bool> DeleteImageAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var image = images.First(i => i.Id == id);
             images.Remove(image);
             return await _imageLocationRepository.DeleteAsync(id);
         }
 
-        public async Task<ImageLocation> CreateImageAsync(ImageLocation image)
+        public async Task<ImageLocation> CreateAsync(ImageLocation image)
         {
             images.Add(image);
             return await _imageLocationRepository.CreateAsync(image);
+        }
+
+        public async Task<ImageLocation> ReadAsync(int id)
+        {
+            return await _imageLocationRepository.ReadAsync(id);
+        }
+
+        public async Task<ImageLocation?> UpdateAsync(ImageLocation image)
+        {
+            return await _imageLocationRepository.UpdateAsync(image);
         }
     }
 }

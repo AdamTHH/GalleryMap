@@ -10,7 +10,7 @@ namespace GalleryMap.Database.Repositories
     public interface IImageLocationRepository
     {
         Task<ImageLocation> CreateAsync(ImageLocation image);
-        Task<ImageLocation?> GetByIdAsync(int id);
+        Task<ImageLocation?> ReadAsync(int id);
         Task<List<ImageLocation>> GetAllAsync();
         Task<ImageLocation?> UpdateAsync(ImageLocation image);
         Task<bool> DeleteAsync(int id);

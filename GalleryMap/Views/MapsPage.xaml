@@ -11,12 +11,7 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="20"/>
             </Border.StrokeShape>
-            <!--<maps:Map x:Name="mainMap">
-                <maps:Map.ItemsSource
-                    >
-                    <Binding Path="Map.Pins" />
-                </maps:Map.ItemsSource>
-            </maps:Map>-->
+            
             <ContentView Content="{Binding Map}" />
         </Border>
     </Grid>
