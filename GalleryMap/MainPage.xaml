@@ -3,11 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:helpers="clr-namespace:GalleryMap.Helpers"
              x:Class="GalleryMap.MainPage">
+
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="Center">
+            <Label Text="Gallery"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+    </Shell.TitleView>
     
     <Grid>
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="20">
-                <Label Text="Összes kép" 
+                <Label Text="Images" 
                        FontSize="24" 
                        FontAttributes="Bold"
                        Margin="0,20,0,10"/>
@@ -50,7 +62,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label Text="Még nincsenek képek. Nyomd meg a + gombot!"
+                <Label Text="Még nincsenek képek"
                        IsVisible="{Binding IsEmpty}"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"

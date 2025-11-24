@@ -4,7 +4,19 @@
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              x:Class="GalleryMap.Views.MapsPage"
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False" >
+
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand"
+          VerticalOptions="Center">
+            <Label Text="Map"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+        </Grid>
+    </Shell.TitleView>
 
     <Grid>
         <Border StrokeThickness="0">

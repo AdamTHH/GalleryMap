@@ -73,7 +73,7 @@ namespace GalleryMap.ViewModels
                     Month = img.CreatedAt.Month
                 })
                 .Select(g => new ImageGroup(
-                    g.First().CreatedAt.ToString("yyyy MMMM", new CultureInfo("hu-HU")),
+                    g.First().CreatedAt.ToString("yyyy MMMM", new CultureInfo("en-US")),
                     g.ToList()
                 ))
                 .ToList();

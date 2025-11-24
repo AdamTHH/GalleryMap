@@ -22,7 +22,7 @@
             Route="MainPage" />
         </Tab>
 
-        <Tab Title="Maps">
+        <Tab Title="Map">
             <Tab.Icon>
                 <FontImageSource 
                     Glyph="{x:Static helpers:IconFont.Map}"
